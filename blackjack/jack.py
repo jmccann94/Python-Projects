@@ -38,6 +38,10 @@ def initialize():
     global deck
     global player
     global dealer
+    global playerBust
+    global dealerBust
+    playerBust = False
+    dealerBust = False
     deck = []
     deck = [Card(value, color) for value in values for color in colors]
 
@@ -70,9 +74,7 @@ def initialize():
         dealer.score1 = dealer.score1 + points1[c.value]
         dealer.score2 = dealer.score2 + points2[c.value]
 
-    # Print players points
-    print(str(player.score1) + " Ace as 1 point")
-    print(str(player.score2) + " Ace as 11 points")
+    
 
 # Function for accepting y or n
 def yesOrno(x):
@@ -114,16 +116,13 @@ def playerDraw():
         print(c.value + " of " + c.color)
         player.score1 = player.score1 + points1[c.value]
         player.score2 = player.score2 + points2[c.value]
-    if player.score1 and player.score2 > 21:
+    if player.score1 > 21 and player.score2 > 21:
         playerBust = True
         finishGame()
     
     #Dealer Draw
     dealerDraw()
 
-    #Print player Score
-    print(str(player.score1) + " Ace as 1 point")
-    print(str(player.score2) + " Ace as 11 points")
 
 # Draws for dealer
 def dealerDraw():
@@ -153,7 +152,7 @@ def dealerScoreEnd():
 
     # Ensures dealer did not bust
     if not dealerBust:
-        while dealer.score2 < 17 and dealer.score1 < 17:
+        while dealer.score2 < 17:
             dealerDraw()
 
     # decides which total to return 
@@ -215,6 +214,10 @@ def finishGame():
 #game loop
 initialize()
 while True:
+
+    # Print players points
+    print(str(player.score1) + " Ace as 1 point")
+    print(str(player.score2) + " Ace as 11 points")
     
     x = input("Would you like to draw? (y/n) ")
     if yesOrno(x):
