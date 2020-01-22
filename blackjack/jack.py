@@ -81,9 +81,9 @@ def yesOrno(x):
     while True:
         if x not in ("n", "y", "N", "Y"):
             print("Try Again")
-        elif x in ("n", "N"):
+        elif x in ("n", "N", "no", "No"):
             return False
-        elif x in ("y", "Y"):
+        elif x in ("y", "Y", "yes", "Yes"):
             return True
         x = input("Enter y/n:")
 
